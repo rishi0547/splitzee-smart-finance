@@ -1,178 +1,265 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Calculator, PieChart, Users, ArrowRight, CheckCircle, Star } from 'lucide-react';
+import { Calculator, Users, TrendingUp, Zap, Shield, Globe, ArrowRight, Star, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const Index = () => {
+  const [user] = useState(() => {
+    const savedUser = localStorage.getItem('splitzee-user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+
+  const features = [
+    {
+      icon: Calculator,
+      title: 'Smart Expense Tracking',
+      description: 'Track every penny with intelligent categorization and beautiful charts'
+    },
+    {
+      icon: Users,
+      title: 'Easy Bill Splitting',
+      description: 'Split bills fairly among friends with custom percentages and alerts'
+    },
+    {
+      icon: Globe,
+      title: 'Multi-Currency Support',
+      description: 'Handle expenses in multiple currencies with real-time conversion'
+    },
+    {
+      icon: TrendingUp,
+      title: 'Financial Insights',
+      description: 'Get detailed analytics and trends to understand your spending habits'
+    },
+    {
+      icon: Shield,
+      title: 'Secure & Private',
+      description: 'Your financial data is stored securely with complete privacy'
+    },
+    {
+      icon: Zap,
+      title: 'Lightning Fast',
+      description: 'Blazing fast performance with offline support and sync'
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: 'Sarah Johnson',
+      role: 'Freelancer',
+      content: 'Splitzee has transformed how I manage my expenses. The currency converter is a game-changer!',
+      rating: 5
+    },
+    {
+      name: 'Mike Chen',
+      role: 'Travel Blogger',
+      content: 'Perfect for group trips! No more awkward conversations about who owes what.',
+      rating: 5
+    },
+    {
+      name: 'Emily Davis',
+      role: 'Small Business Owner',
+      content: 'The analytics help me understand my spending patterns better than any other app.',
+      rating: 5
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#F5F5F5] via-white to-[#FFDC4A]/10 dark:from-[#121212] dark:via-[#1E1E1E] dark:to-[#FFDC4A]/5">
       {/* Header */}
-      <header className="px-6 py-4 bg-white/80 backdrop-blur-md border-b border-white/20">
+      <header className="px-6 py-4 bg-white/80 dark:bg-[#1E1E1E]/80 backdrop-blur-md border-b border-white/20 dark:border-gray-800/20">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Splitzee
-          </h1>
-          <nav className="hidden md:flex space-x-6">
-            <Link to="/tracker" className="text-gray-600 hover:text-blue-600 transition-colors">
-              Expense Tracker
-            </Link>
-            <Link to="/splitter" className="text-gray-600 hover:text-blue-600 transition-colors">
-              Bill Splitter
-            </Link>
-          </nav>
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-[#FFDC4A] to-[#FFD447] rounded-xl flex items-center justify-center">
+              <span className="text-lg font-bold text-[#121212]">S</span>
+            </div>
+            <h1 className="text-2xl font-bold text-[#121212] dark:text-white">Splitzee</h1>
+          </div>
+          <div className="flex items-center space-x-4">
+            <ThemeToggle />
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <span className="text-gray-700 dark:text-gray-300">Welcome, {user.name}!</span>
+                <Button
+                  onClick={() => {
+                    localStorage.removeItem('splitzee-user');
+                    window.location.reload();
+                  }}
+                  variant="outline"
+                  size="sm"
+                >
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <Button variant="outline" size="sm" asChild>
+                  <Link to="/signin">Sign In</Link>
+                </Button>
+                <Button 
+                  size="sm" 
+                  className="bg-gradient-to-r from-[#FFDC4A] to-[#FFD447] hover:from-[#FFD447] hover:to-[#FFDC4A] text-[#121212]"
+                  asChild
+                >
+                  <Link to="/signup">Sign Up</Link>
+                </Button>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
       {/* Hero Section */}
       <section className="px-6 py-20">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 bg-clip-text text-transparent">
-            Track Smart. Split Easy.
-          </h2>
-          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Simplify expense management with smart tracking and effortless splitting.
-          </p>
-          
+          <div className="mb-8">
+            <div className="inline-flex items-center px-4 py-2 bg-[#FFDC4A]/20 dark:bg-[#FFDC4A]/10 rounded-full text-[#121212] dark:text-[#FFDC4A] text-sm font-medium mb-6">
+              <Zap className="h-4 w-4 mr-2" />
+              Track Smart. Split Easy.
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold text-[#121212] dark:text-white mb-6 leading-tight">
+              Master Your Money with{' '}
+              <span className="bg-gradient-to-r from-[#FFDC4A] to-[#FFD447] bg-clip-text text-transparent">
+                Splitzee
+              </span>
+            </h1>
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto">
+              Simplify expense management with smart tracking, effortless splitting, and multi-currency support. 
+              Perfect for individuals, friends, and businesses.
+            </p>
+          </div>
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Button asChild size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3">
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-[#FFDC4A] to-[#FFD447] hover:from-[#FFD447] hover:to-[#FFDC4A] text-[#121212] font-semibold h-14 px-8"
+              asChild
+            >
               <Link to="/tracker">
-                <PieChart className="mr-2 h-5 w-5" />
+                <Calculator className="h-5 w-5 mr-2" />
                 Track Expenses
+                <ArrowRight className="h-5 w-5 ml-2" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 px-8 py-3">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-[#FFDC4A] text-[#FFDC4A] hover:bg-[#FFDC4A] hover:text-[#121212] h-14 px-8"
+              asChild
+            >
               <Link to="/splitter">
-                <Users className="mr-2 h-5 w-5" />
+                <Users className="h-5 w-5 mr-2" />
                 Split Bills
               </Link>
             </Button>
           </div>
 
-          {/* Hero Icons */}
-          <div className="flex justify-center items-center space-x-8 opacity-80">
-            <div className="p-4 bg-white/60 rounded-full backdrop-blur-sm">
-              <Calculator className="h-8 w-8 text-blue-600" />
-            </div>
-            <div className="p-4 bg-white/60 rounded-full backdrop-blur-sm">
-              <PieChart className="h-8 w-8 text-purple-600" />
-            </div>
-            <div className="p-4 bg-white/60 rounded-full backdrop-blur-sm">
-              <Users className="h-8 w-8 text-teal-600" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="px-6 py-16 bg-white/40 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto">
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">
-            How It Works
-          </h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <PieChart className="h-8 w-8 text-white" />
+          {/* Demo Preview */}
+          <div className="relative">
+            <div className="bg-gradient-to-r from-[#FFDC4A]/20 to-[#FFD447]/20 dark:from-[#FFDC4A]/10 dark:to-[#FFD447]/10 rounded-3xl p-8 backdrop-blur-sm">
+              <div className="grid md:grid-cols-2 gap-8 items-center">
+                <div className="text-left">
+                  <h3 className="text-2xl font-bold text-[#121212] dark:text-white mb-4">
+                    See Splitzee in Action
+                  </h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-center text-gray-700 dark:text-gray-300">
+                      <CheckCircle className="h-5 w-5 text-[#4CAF50] mr-3" />
+                      Add expenses in seconds
+                    </li>
+                    <li className="flex items-center text-gray-700 dark:text-gray-300">
+                      <CheckCircle className="h-5 w-5 text-[#4CAF50] mr-3" />
+                      Visualize spending with charts
+                    </li>
+                    <li className="flex items-center text-gray-700 dark:text-gray-300">
+                      <CheckCircle className="h-5 w-5 text-[#4CAF50] mr-3" />
+                      Split bills fairly among friends
+                    </li>
+                    <li className="flex items-center text-gray-700 dark:text-gray-300">
+                      <CheckCircle className="h-5 w-5 text-[#4CAF50] mr-3" />
+                      Handle multiple currencies
+                    </li>
+                  </ul>
                 </div>
-                <h4 className="text-xl font-semibold mb-2">Track Expenses</h4>
-                <p className="text-gray-600">
-                  Add your daily expenses with categories and see beautiful charts of your spending patterns.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-8 w-8 text-white" />
+                <div className="bg-white dark:bg-[#1E1E1E] rounded-2xl p-6 shadow-2xl">
+                  <div className="h-48 bg-gradient-to-br from-[#FFDC4A]/10 to-[#FFD447]/10 rounded-xl flex items-center justify-center">
+                    <div className="text-center">
+                      <TrendingUp className="h-12 w-12 text-[#FFDC4A] mx-auto mb-3" />
+                      <p className="text-gray-600 dark:text-gray-400">Interactive Demo</p>
+                    </div>
+                  </div>
                 </div>
-                <h4 className="text-xl font-semibold mb-2">Split Bills</h4>
-                <p className="text-gray-600">
-                  Easily divide expenses among friends with equal or custom splits. No more awkward math!
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-shadow">
-              <CardContent className="p-6 text-center">
-                <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-teal-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle className="h-8 w-8 text-white" />
-                </div>
-                <h4 className="text-xl font-semibold mb-2">Stay Organized</h4>
-                <p className="text-gray-600">
-                  Keep track of who owes what and manage your finances with beautiful, intuitive tools.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="px-6 py-16">
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">
-            Why Choose Splitzee?
-          </h3>
-          <div className="grid md:grid-cols-2 gap-8">
-            {[
-              "Smart categorization with visual charts",
-              "Effortless bill splitting with friends",
-              "Beautiful, intuitive interface",
-              "Works perfectly on all devices",
-              "No sign-up required - start immediately",
-              "Your data stays private and secure"
-            ].map((benefit, index) => (
-              <div key={index} className="flex items-center space-x-3">
-                <CheckCircle className="h-6 w-6 text-green-500 flex-shrink-0" />
-                <span className="text-gray-700 text-lg">{benefit}</span>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="px-6 py-20 bg-white/50 dark:bg-[#1E1E1E]/50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-[#121212] dark:text-white mb-4">
+              Everything You Need to Manage Money
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              Powerful features designed to make expense management effortless
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <Card key={index} className="bg-white/80 dark:bg-[#1E1E1E]/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <CardContent className="p-6">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#FFDC4A] to-[#FFD447] rounded-xl flex items-center justify-center mb-4">
+                    <feature.icon className="h-6 w-6 text-[#121212]" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-[#121212] dark:text-white mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {feature.description}
+                  </p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="px-6 py-16 bg-white/40 backdrop-blur-sm">
+      {/* Testimonials Section */}
+      <section className="px-6 py-20">
         <div className="max-w-6xl mx-auto">
-          <h3 className="text-3xl font-bold text-center mb-12 text-gray-800">
-            What Users Say
-          </h3>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-[#121212] dark:text-white mb-4">
+              Loved by Thousands
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300">
+              See what our users say about Splitzee
+            </p>
+          </div>
+
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Sarah Chen",
-                role: "College Student",
-                text: "Finally, no more arguments about who owes what! Splitzee makes splitting dinner bills so easy.",
-                rating: 5
-              },
-              {
-                name: "Mike Rodriguez",
-                role: "Young Professional",
-                text: "The expense tracking is amazing. I can finally see where my money goes with those beautiful charts.",
-                rating: 5
-              },
-              {
-                name: "Emma Wilson",
-                role: "Travel Enthusiast",
-                text: "Perfect for group trips! We used it throughout our Europe vacation and it saved so much hassle.",
-                rating: 5
-              }
-            ].map((testimonial, index) => (
-              <Card key={index} className="bg-white/80 backdrop-blur-sm border-0 shadow-lg">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="bg-white/80 dark:bg-[#1E1E1E]/80 backdrop-blur-sm border-0 shadow-lg">
                 <CardContent className="p-6">
                   <div className="flex mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                      <Star key={i} className="h-5 w-5 text-[#FFDC4A] fill-current" />
                     ))}
                   </div>
-                  <p className="text-gray-700 mb-4">"{testimonial.text}"</p>
+                  <p className="text-gray-700 dark:text-gray-300 mb-4 italic">
+                    "{testimonial.content}"
+                  </p>
                   <div>
-                    <p className="font-semibold text-gray-800">{testimonial.name}</p>
-                    <p className="text-sm text-gray-600">{testimonial.role}</p>
+                    <p className="font-semibold text-[#121212] dark:text-white">
+                      {testimonial.name}
+                    </p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {testimonial.role}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -182,35 +269,80 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="px-6 py-20">
+      <section className="px-6 py-20 bg-gradient-to-r from-[#FFDC4A] to-[#FFD447]">
         <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-4xl font-bold mb-6 text-gray-800">
-            Ready to Take Control of Your Expenses?
-          </h3>
-          <p className="text-xl text-gray-600 mb-8">
-            Start tracking and splitting your expenses today - it's completely free!
+          <h2 className="text-4xl font-bold text-[#121212] mb-4">
+            Ready to Take Control of Your Finances?
+          </h2>
+          <p className="text-xl text-[#121212]/80 mb-8">
+            Join thousands of users who are already managing their expenses smarter with Splitzee
           </p>
-          <Button asChild size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3">
-            <Link to="/tracker">
-              Get Started Now
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              size="lg" 
+              className="bg-[#121212] hover:bg-[#121212]/90 text-white h-14 px-8"
+              asChild
+            >
+              <Link to={user ? "/tracker" : "/signup"}>
+                {user ? "Go to Dashboard" : "Get Started Free"}
+                <ArrowRight className="h-5 w-5 ml-2" />
+              </Link>
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-[#121212] text-[#121212] hover:bg-[#121212] hover:text-white h-14 px-8"
+              asChild
+            >
+              <Link to="/splitter">Try Bill Splitter</Link>
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="px-6 py-8 bg-gray-800 text-white">
-        <div className="max-w-6xl mx-auto text-center">
-          <h4 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Splitzee
-          </h4>
-          <p className="text-gray-300 mb-4">
-            Making expense management simple and social.
-          </p>
-          <p className="text-gray-400 text-sm">
-            © 2024 Splitzee. Built with ❤️ for better financial management.
-          </p>
+      <footer className="px-6 py-12 bg-[#121212] text-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-8 h-8 bg-gradient-to-r from-[#FFDC4A] to-[#FFD447] rounded-lg flex items-center justify-center">
+                  <span className="text-sm font-bold text-[#121212]">S</span>
+                </div>
+                <span className="text-xl font-bold">Splitzee</span>
+              </div>
+              <p className="text-gray-400">
+                Smart expense tracking and bill splitting made simple.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Product</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link to="/tracker" className="hover:text-[#FFDC4A]">Expense Tracker</Link></li>
+                <li><Link to="/splitter" className="hover:text-[#FFDC4A]">Bill Splitter</Link></li>
+                <li><a href="#" className="hover:text-[#FFDC4A]">Mobile App</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Company</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-[#FFDC4A]">About Us</a></li>
+                <li><a href="#" className="hover:text-[#FFDC4A]">Contact</a></li>
+                <li><a href="#" className="hover:text-[#FFDC4A]">Privacy Policy</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Support</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-[#FFDC4A]">Help Center</a></li>
+                <li><a href="#" className="hover:text-[#FFDC4A]">Documentation</a></li>
+                <li><a href="#" className="hover:text-[#FFDC4A]">Community</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 Splitzee. All rights reserved.</p>
+          </div>
         </div>
       </footer>
     </div>
