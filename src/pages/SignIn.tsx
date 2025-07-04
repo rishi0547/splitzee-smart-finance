@@ -45,9 +45,11 @@ const SignIn = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#F5F5F5] via-white to-[#FFDC4A]/10 dark:from-[#121212] dark:via-[#1E1E1E] dark:to-[#FFDC4A]/5 flex items-center justify-center p-4">
       <Card className="w-full max-w-md bg-white/90 dark:bg-[#1E1E1E]/90 backdrop-blur-sm border-0 shadow-2xl">
         <CardHeader className="text-center pb-6">
-          <div className="mx-auto w-16 h-16 bg-gradient-to-r from-[#FFDC4A] to-[#FFD447] rounded-2xl flex items-center justify-center mb-4">
-            <span className="text-2xl font-bold text-[#121212]">S</span>
-          </div>
+          <img 
+            src="/lovable-uploads/559dd7ae-1ca8-426d-8342-0ac04c422879.png" 
+            alt="Splitzee Logo" 
+            className="mx-auto w-16 h-16 rounded-2xl mb-4"
+          />
           <CardTitle className="text-2xl font-bold text-[#121212] dark:text-white">
             Welcome Back
           </CardTitle>

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Plus, Edit, Trash2, PieChart, BarChart3, ArrowLeft, Search, Filter, Bell, Download, Upload } from 'lucide-react';
@@ -186,9 +185,11 @@ const ExpenseTracker = () => {
               </Link>
             </Button>
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-[#FFDC4A] to-[#FFD447] rounded-lg flex items-center justify-center">
-                <span className="text-sm font-bold text-[#121212]">S</span>
-              </div>
+              <img 
+                src="/lovable-uploads/559dd7ae-1ca8-426d-8342-0ac04c422879.png" 
+                alt="Splitzee Logo" 
+                className="w-8 h-8 rounded-lg"
+              />
               <h1 className="text-2xl font-bold text-[#121212] dark:text-white">
                 Expense Tracker
               </h1>

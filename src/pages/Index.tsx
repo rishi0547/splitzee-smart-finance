@@ -72,9 +72,11 @@ const Index = () => {
       <header className="px-6 py-4 bg-white/80 dark:bg-[#1E1E1E]/80 backdrop-blur-md border-b border-white/20 dark:border-gray-800/20">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-[#FFDC4A] to-[#FFD447] rounded-xl flex items-center justify-center">
-              <span className="text-lg font-bold text-[#121212]">S</span>
-            </div>
+            <img 
+              src="/lovable-uploads/559dd7ae-1ca8-426d-8342-0ac04c422879.png" 
+              alt="Splitzee Logo" 
+              className="w-10 h-10 rounded-xl"
+            />
             <h1 className="text-2xl font-bold text-[#121212] dark:text-white">Splitzee</h1>
           </div>
           <div className="flex items-center space-x-4">
@@ -186,7 +188,11 @@ const Index = () => {
                 <div className="bg-white dark:bg-[#1E1E1E] rounded-2xl p-6 shadow-2xl">
                   <div className="h-48 bg-gradient-to-br from-[#FFDC4A]/10 to-[#FFD447]/10 rounded-xl flex items-center justify-center">
                     <div className="text-center">
-                      <TrendingUp className="h-12 w-12 text-[#FFDC4A] mx-auto mb-3" />
+                      <img 
+                        src="/lovable-uploads/559dd7ae-1ca8-426d-8342-0ac04c422879.png" 
+                        alt="Splitzee Logo" 
+                        className="w-20 h-20 mx-auto mb-3 rounded-2xl"
+                      />
                       <p className="text-gray-600 dark:text-gray-400">Interactive Demo</p>
                     </div>
                   </div>
@@ -306,9 +312,11 @@ const Index = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-[#FFDC4A] to-[#FFD447] rounded-lg flex items-center justify-center">
-                  <span className="text-sm font-bold text-[#121212]">S</span>
-                </div>
+                <img 
+                  src="/lovable-uploads/559dd7ae-1ca8-426d-8342-0ac04c422879.png" 
+                  alt="Splitzee Logo" 
+                  className="w-8 h-8 rounded-lg"
+                />
                 <span className="text-xl font-bold">Splitzee</span>
               </div>
               <p className="text-gray-400">
